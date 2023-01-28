@@ -10,7 +10,6 @@ import os
 
 app = Flask(__name__, instance_relative_config=True)
 app.config['SECRET_KEY'] = 'random-string'
-app.config['JWT_AUTH_ENDPOINT'] = 'Bearer'
 jwt = JWT(app, authenticate, identity)
 sheet_service = GoogleSheetService()
 storage_service = StorageService()
