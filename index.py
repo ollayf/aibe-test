@@ -31,16 +31,21 @@ def get_prompts():
 @app.route('/recordings', methods=['POST'])
 @jwt_required()
 def post_recording():
-    # Upload wav file to storage, temporarily saving to file
+    # Temporarily save file
     recording = request.files['file']
     filename = datetime.now().strftime("%d-%m-%y-%H:%M:%S")
     recording.save(f'tmp/{filename}.wav')
-    storage_service.upload(filename)
-    os.remove(f'tmp/{filename}.wav')
 
-    # Process in DTO
+    # Upload to storage bucket
+    storage_service.upload(filename)
+
+    # Process in DTO and evaluate
     record = Record(request.form, filename)
 
     # Save record to database
     sheet_service.add_result(record.dump())
+
+    # Delete file
+    os.remove(f'tmp/{filename}.wav')
+
     return {'result': 'success'}

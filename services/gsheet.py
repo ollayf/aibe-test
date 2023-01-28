@@ -4,7 +4,7 @@ import pandas as pd
 class GoogleSheetService:
   def __init__(self) -> None:
     gc = pygsheets.authorize(
-        service_file='./assets/shine-google-drive.json')
+        service_file='./credentials.json')
     sh = gc.open('Google Drive')
     self.metadata_sheet = sh[0]
     self.data_sheet = sh[1]

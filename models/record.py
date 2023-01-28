@@ -10,6 +10,7 @@ class Record:
         self.kindergarten_group = form.get('kindergarten_group')
         self.center_name = form.get('center_name')
         self.birthday = form.get('birthday')
+        self.prompt = form.get('prompt')
         self.level_of_study = form.get('level_of_study')
         self.mother_tongue = form.get('mother_tongue')
         self.recorder_1 = form.get('recorder_1')
@@ -20,9 +21,8 @@ class Record:
 
     def dump(self):
         return [[
-            self.created_at, self.student_name, self.teacher_helping, self.gender, self.kindergarten_group, self.center_name, self.birthday, self.level_of_study, self.mother_tongue, self.recorder_1, self.recorder_2, self.wav_file_location, self.good, self.fluency_score, self.noise_level, self.accuracy_score, self.remarks
+            self.created_at, self.student_name, self.teacher_helping, self.gender, self.kindergarten_group, self.center_name, self.birthday, self.level_of_study, self.mother_tongue, self.recorder_1, self.recorder_2, self.prompt, self.wav_file_location, self.good, self.fluency_score, self.noise_level, self.accuracy_score, self.remarks
         ]]
-
 
     def _evaluate(self, wav_file):
         self.good = 'Y'
