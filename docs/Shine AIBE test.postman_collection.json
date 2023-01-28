@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "ecdd0af5-d7c8-46fb-a601-2e24e7a1ed51",
+		"name": "Shine AIBE test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17851050"
+	},
+	"item": [
+		{
+			"name": "healthcheck",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "recordings",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/lucasng/Downloads/file_example_WAV_1MG.wav"
+						},
+						{
+							"key": "student_name",
+							"value": "jake",
+							"type": "text"
+						},
+						{
+							"key": "teacher_helping",
+							"value": "teacher_helping",
+							"type": "text"
+						},
+						{
+							"key": "gender",
+							"value": "gender",
+							"type": "text"
+						},
+						{
+							"key": "kindergarten_group",
+							"value": "kindergarten_group",
+							"type": "text"
+						},
+						{
+							"key": "center_name",
+							"value": "center_name",
+							"type": "text"
+						},
+						{
+							"key": "birthday",
+							"value": "birthday",
+							"type": "text"
+						},
+						{
+							"key": "level_of_study",
+							"value": "level_of_study",
+							"type": "text"
+						},
+						{
+							"key": "mother_tongue",
+							"value": "mother_tongue",
+							"type": "text"
+						},
+						{
+							"key": "recorder_1",
+							"value": "recorder_1",
+							"type": "text"
+						},
+						{
+							"key": "recorder_2",
+							"value": "recorder_2",
+							"type": "text"
+						},
+						{
+							"key": "remarks",
+							"value": "remarks",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5001/recordings",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"recordings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"shine\",\n    \"password\": \"shine\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "prompts",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
