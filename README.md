@@ -4,7 +4,7 @@
 - integrate audio file predictor
 
 ## API usage
-See (here)[docs/README.md]
+See [here](docs/README.md)
 
 ## Setup instructions
 

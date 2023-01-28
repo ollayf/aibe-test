@@ -1,7 +1,7 @@
 # API use
 ## Happy path
 
-Load (postman collection)[Shine AIBE test.postman_collection.json] for reference
+Load [postman collection](v1.postman_collection.json) for reference
 
 Step 1: Call `GET /prompts` to get prompts
 Step 2: Call `POST /auth` to get JWT token using `username: shine, password: shine` as credentials
