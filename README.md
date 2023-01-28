@@ -20,8 +20,8 @@ Export the account key as a JSON ([instructions](https://stackoverflow.com/quest
 Rename the JSON to `credentials.json` and store it in the root of this project.
 
 ### 2a. Create a storage bucket
-See (here)[https://cloud.google.com/storage/docs/creating-buckets]
-After creating bucket, go to [storage.py]('./services/storage.py') and add in
+See [here](https://cloud.google.com/storage/docs/creating-buckets)
+After creating bucket, go to [storage.py]('services/storage.py') and add in
 ### 2b. Create a google sheet
 Create a google sheet from the [following template](https://docs.google.com/spreadsheets/d/1T5P6UVy6jnTe_S9nnvUQ-P17xrCBq_rtQDOx1SttcD4/edit?usp=sharing) ['File' -> 'Make a copy']
 
