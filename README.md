@@ -25,14 +25,17 @@ After creating bucket, go to (storage.py)['./services/storage.py'] and add in
 ### 2b. Create a google sheet
 Create a google sheet from the [following template](https://docs.google.com/spreadsheets/d/1T5P6UVy6jnTe_S9nnvUQ-P17xrCBq_rtQDOx1SttcD4/edit?usp=sharing) ['File' -> 'Make a copy']
 
-Rename the google sheet to '[SHINE] AIBE test data' (name is hardcoded in code)
+Rename the google sheet to '[SHINE] AIBE test data' (name is hardcoded in [code](services/gsheet.py))
 
 Grant edit access to the service account.
 
 ### 3. Run project
 Create docker image
+
 ```docker build --tag shine-aibe .```
+
 Run on http://localhost:5001
+
 ```docker run -d -p 5001:80 shine-aibe```
 
 
@@ -41,4 +44,4 @@ Run on http://localhost:5001
 1. Abstract env configuration file to safely store JWT secret
 2. Swagger docs
 3. Add a more robust class for google sheet: difficult to add new fields and ensure columns are 'aligned'
-4. Fix hardcoding of google sheet (ideally done when env vars are set up)
+4. Fix hardcoding of google sheet name, project id, storage bucket (ideally done when env vars are set up)
