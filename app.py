@@ -6,10 +6,12 @@ from services.gsheet import GoogleSheetService
 from services.storage import StorageService
 from models.record import Record
 from datetime import datetime
+from flask_cors import CORS
 import os
 
 app = Flask(__name__, instance_relative_config=True)
 app.config['SECRET_KEY'] = 'random-string'
+cors = CORS(app, resources={r"/*": {"origins": "*"}})
 jwt = JWT(app, authenticate, identity)
 sheet_service = GoogleSheetService()
 storage_service = StorageService()

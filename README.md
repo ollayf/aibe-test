@@ -45,3 +45,4 @@ Run on http://localhost:5001
 2. Swagger docs
 3. Add a more robust class for google sheet: difficult to add new fields and ensure columns are 'aligned'
 4. Fix hardcoding of google sheet name, project id, storage bucket (ideally done when env vars are set up)
+5. Use production settings for app [ref](https://flask.palletsprojects.com/en/2.2.x/tutorial/deploy/)
