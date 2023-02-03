@@ -38,8 +38,6 @@ Run on http://localhost:5001
 
 ```docker run -d -p 5001:80 shine-aibe```
 
-
-
 ## Further works
 1. Abstract env configuration file to safely store JWT secret
 2. Swagger docs
@@ -61,6 +59,9 @@ Run on http://localhost:5001
 - nvidia-container-toolkit (GPU Accelerated Inference)
 ## Main system
 - Ubuntu 20.04
+- NVIDIA GPU (Compute Capability 6.0)
+- x86_64 Architecture
+- AMD CPU
 
 ## Run
 ### Docker compose
