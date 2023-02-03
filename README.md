@@ -73,6 +73,13 @@ Then, build the image for the endpoint server using:
 Set up both containers together (detach mode)
 `docker-compose up -d`
 
+## When making edits
+You wouldn't usually make edits to the inference server since I've built a custom image, so I will omit details here
+
+### Endpoint server
+After edits, run:  
+`docker build -t shine_aibe:v1 .`
+
 ### Locally on your PC
 Firstly, ensure that all dependencies are installed  
 Edit the URL in this function [script](deploy/predict_server.py).  
