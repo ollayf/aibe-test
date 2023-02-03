@@ -15,6 +15,9 @@ import numpy as np
 import time
 import sys
 
+URL='172.28.1.1:8001' # for docker
+# URL='localhost:8001' # for localhosting
+
 def predict(model_path, audio_file):
 
     processor = Wav2Vec2Processor.from_pretrained("facebook/wav2vec2-xlsr-53-espeak-cv-ft")
@@ -23,7 +26,7 @@ def predict(model_path, audio_file):
     input_values = input_values.numpy()
 
     triton_client = grpcclient.InferenceServerClient(
-            url='localhost:8001',
+            url=URL,
             verbose=False,
             ssl=False,
             root_certificates=None,

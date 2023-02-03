@@ -46,3 +46,34 @@ Run on http://localhost:5001
 3. Add a more robust class for google sheet: difficult to add new fields and ensure columns are 'aligned'
 4. Fix hardcoding of google sheet name, project id, storage bucket (ideally done when env vars are set up)
 5. Use production settings for app [ref](https://flask.palletsprojects.com/en/2.2.x/tutorial/deploy/)
+
+## Dependencies
+### If you are testing it locally
+- Python: requirements.txt
+- Ubuntu:
+    - espeak
+    - libsndfile1-dev
+- nvidia-container-toolkit (GPU Accelerated Inference)
+- Get credentials file and docker
+### If you are using docker
+- docker (20.10.12)
+- docker-compose (2.14.2)
+- nvidia-container-toolkit (GPU Accelerated Inference)
+## Main system
+- Ubuntu 20.04
+
+## Run
+### Docker compose
+This is the quickest way to set everything up  
+Firstly, load the docker image of the inference server  
+`docker load < <inference_server>.tar`
+Then, build the image for the endpoint server using:  
+`docker build -t shine_aibe:v1 .`
+Set up both containers together (detach mode)
+`docker-compose up -d`
+
+### Locally on your PC
+Firstly, ensure that all dependencies are installed  
+Edit the URL in this function [script](deploy/predict_server.py).  
+- For docker: "172.28.1.1:8001"
+- For local hosting: "localhost:8001"

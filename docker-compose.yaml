@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  inference:
+    image: photon_server:v1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    networks:
+      backend:
+          ipv4_address: 172.28.1.1
+  endpoint:
+    image: shine_aibe:v1
+    links:
+      - "inference: inf"
+    ports:
+      - "5001:80"
+    networks:
+      backend:
+          ipv4_address: 172.28.1.2
+
+networks:
+  backend:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16

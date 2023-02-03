@@ -51,8 +51,6 @@ def post_recording():
 
     # Process in DTO and evaluate
     record = Record(request.form, filename)
-    print(request.form)
-    print(type(request.form))
 
     # Save record to database
     sheet_service.add_result(record.dump())
