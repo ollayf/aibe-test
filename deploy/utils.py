@@ -112,7 +112,7 @@ def wer2(ref, hyp ,debug=True):
         print("#ins " + str(numIns))
     # return (numSub + numDel + numIns) / (float) (len(r))
     wer_result = round( (numSub + numDel + numIns) / (float) (len(r)), 3)
-    loss = round( (numSub + numDel + numIns) / (float) (max_len), 3)
+    loss = round( (numSub + numDel) / (float) (max_len), 3)
     accuracy = 1 - loss
     return {'WER':wer_result, 'acc': accuracy, 'numCor':numCor, 'numSub':numSub, 'numIns':numIns, 'numDel':numDel, "numCount": len(r), "loss":loss}
 

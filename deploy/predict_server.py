@@ -1,6 +1,6 @@
 import tritonclient.grpc as grpcclient
 
-import utils
+from .utils import wer2, wer
 from phonemizer import phonemize, separator
 
 #NEW STUFF
@@ -49,12 +49,14 @@ def predict(model_path, audio_file):
     return transcription
     
 
-def get_score(model_path, audio_file, correct):
+def get_score(model_path, audio_file, correct, grading_algo):
     transcription = predict(model_path, audio_file)
     sp =  separator.Separator(phone=' ', word='')
     ref = phonemize(correct, separator=sp)
-
-    return utils.wer2(ref, transcription, False)['acc']
+    if grading_algo == "wer2":
+        return wer2(ref, transcription, False)
+    else:
+        return wer(ref, transcription, False)
 
 
 if __name__ == '__main__':
