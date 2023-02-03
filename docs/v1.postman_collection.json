@@ -25,7 +25,7 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/Users/lucasng/Downloads/file_example_WAV_1MG.wav"
+							"src": "/home/hosea/develop/aibe-test/tmp/a_fat_cat_aaron.wav"
 						},
 						{
 							"key": "student_name",

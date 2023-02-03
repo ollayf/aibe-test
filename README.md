@@ -13,7 +13,7 @@ This service account grants access to google sheets and google cloud buckets
 
 https://cloud.google.com/iam/docs/creating-managing-service-accounts
 
-Grant the account role 'Storage Access Admin'
+Grant the account role 'Storage Object Admin'
 
 Export the account key as a JSON ([instructions](https://stackoverflow.com/questions/46287267/how-can-i-get-the-file-service-account-json-for-google-translate-api))
 

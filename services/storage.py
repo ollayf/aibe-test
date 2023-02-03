@@ -12,7 +12,6 @@ class StorageService:
     blob = self.bucket.blob(f'{filename}')
     blob.upload_from_filename(f'tmp/{filename}.wav')
 
-
 if __name__ == '__main__':
   s = StorageService()
   s.upload()

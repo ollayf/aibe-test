@@ -4,6 +4,7 @@ from flask_jwt import JWT, jwt_required
 from services.auth import authenticate, identity
 from services.gsheet import GoogleSheetService
 from services.storage import StorageService
+from services.drive_storage import DriveStorageService
 from models.record import Record
 from datetime import datetime
 from flask_cors import CORS
@@ -14,7 +15,8 @@ app.config['SECRET_KEY'] = 'random-string'
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 jwt = JWT(app, authenticate, identity)
 sheet_service = GoogleSheetService()
-storage_service = StorageService()
+storage_service = DriveStorageService()
+print("Created everything")
 
 
 @app.route('/')
