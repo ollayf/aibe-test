@@ -6,6 +6,7 @@ SHEET_NAME = '[SHINE] AIBE test data'
 
 class GoogleSheetService:
     TEAM_DRIVE_ID = '1mchPmcE7q-A3JNTxxcGR15DCF3LPWKOy'
+    SHEET_URL = 'https://docs.google.com/spreadsheets/d/1WtnaWtzbJnVSmNuvp7QBbVwDW0__MPoROCpyUT6Z_OI'
     def __init__(self) -> None:
         gc = pygsheets.authorize(
             service_file='credentials.json')
@@ -15,7 +16,7 @@ class GoogleSheetService:
         # print(gc.spreadsheet_titles())
 
         # sh = gc.open(SHEET_NAME)
-        sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1WtnaWtzbJnVSmNuvp7QBbVwDW0__MPoROCpyUT6Z_OI')
+        sh = gc.open_by_url(self.SHEET_URL)
         self.metadata_sheet = sh[0]
         self.data_sheet = sh[1]
 

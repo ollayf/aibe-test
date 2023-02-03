@@ -47,7 +47,6 @@ def post_recording():
 
     # Save record to database
     sheet_service.add_result(record.dump())
-
     # Delete file
     os.remove(f'tmp/{filename}.wav')
 
