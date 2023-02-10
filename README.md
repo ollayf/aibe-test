@@ -63,7 +63,17 @@ Run on http://localhost:5001
 - x86_64 Architecture
 - AMD CPU
 
-## Run
+## Quick Setup
+
+### Install Depedencies
+```
+# docker and docker-compose
+sudo snap install docker
+sudo curl -L "https://github.com/docker/compose/releases/download/2.14.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+```
+
+
 ### Docker compose
 This is the quickest way to set everything up  
 Firstly, load the docker image of the inference server  

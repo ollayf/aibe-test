@@ -3,6 +3,13 @@ version: "3"
 services:
   inference:
     image: photon_server:v1
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
     networks:
       backend:
           ipv4_address: 172.28.1.1
