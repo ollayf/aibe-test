@@ -3,7 +3,6 @@ from flask import Flask, request
 from flask_jwt import JWT, jwt_required
 from services.auth import authenticate, identity
 from services.gsheet import GoogleSheetService
-from services.storage import StorageService
 from services.drive_storage import DriveStorageService
 from models.record import Record
 from datetime import datetime
@@ -47,12 +46,14 @@ def post_recording():
     recording.save(f'tmp/{filename}.wav')
 
     # Upload to storage bucket
+    print("Uploading to Drive")
     storage_service.upload(filename)
 
     # Process in DTO and evaluate
     record = Record(request.form, filename)
 
     # Save record to database
+    print("Updating to Google sheets")
     sheet_service.add_result(record.dump())
     score = get_score(ONNX_MODEL, f'tmp/{filename}.wav', 
         request.form["prompt"], grading_algo=request.form["grading_algo"])
