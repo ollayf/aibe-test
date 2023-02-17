@@ -12,4 +12,5 @@ def get_channels(audio_seg):
     return len(res)
 
 def export_to_1ch(audio_seg, dst_path):
+    audio_seg = audio_seg.set_channels(1)
     audio_seg.export(dst_path, format='wav')

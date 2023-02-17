@@ -16,16 +16,35 @@ class Record:
         self.recorder_1 = form.get('recorder_1')
         self.recorder_2 = form.get('recorder_2')
         self.wav_file_location = file_location
-        self._evaluate(form.get('wav_file'))
+        self.grading_algo = form.get('grading_algo', 'wer2')
+        self.good = form.get('good')
+        self.fluency_score = form.get('fluency_score')
+        self.noise_level = form.get('noise_level')
+        self.accuracy_score = form.get('accuracy_score')
         self.remarks = form.get('remarks', '')
 
     def dump(self):
         return [[
-            self.created_at, self.student_name, self.teacher_helping, self.gender, self.kindergarten_group, self.center_name, self.birthday, self.level_of_study, self.mother_tongue, self.recorder_1, self.recorder_2, self.prompt, self.wav_file_location, self.good, self.fluency_score, self.noise_level, self.accuracy_score, self.remarks
+            self.created_at, self.student_name, self.teacher_helping, self.gender, self.kindergarten_group, self.center_name, self.birthday, self.level_of_study, self.mother_tongue, self.recorder_1, self.recorder_2, self.prompt, self.wav_file_location, self.good, self.fluency_score, self.noise_level, self.accuracy_score, 
+            self.grading_algo, self.grade, self.accuracy, self.loss, self.remarks
         ]]
 
-    def _evaluate(self, wav_file):
-        self.good = 'Y'
-        self.fluency_score = 5
-        self.noise_level = 3
-        self.accuracy_score = 3
+    def _evaluate(self, result):
+        '''
+        {
+        "result": "success",
+        "scores": {
+            "WER": 0.143,
+            "acc": 0.857,
+            "loss": 0.143,
+            "numCor": 6,
+            "numCount": 7,
+            "numDel": 0,
+            "numIns": 0,
+            "numSub": 1
+            }
+        }
+        '''
+        self.grade = result["WER"]
+        self.accuracy = result["acc"]
+        self.loss = result["loss"]

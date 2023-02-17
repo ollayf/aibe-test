@@ -1,3 +1,4 @@
 photon_server_v1.tar
 requirements
 run_docker*
+*.wav

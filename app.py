@@ -50,21 +50,15 @@ def post_recording():
 
     aud_seg = audio_utils.get_audio_segment(src_path)
     converted = False
-    if audio_utils.get_channels(aud_seg) > 1:
+    channels = audio_utils.get_channels(aud_seg)
+    if channels > 1:
         audio_utils.export_to_1ch(aud_seg, ch1_path)
         converted = True
         
 
     # Upload to storage bucket
-    print("Uploading to Drive")
+    # print("Uploading to Drive")
     storage_service.upload(filename)
-
-    # Process in DTO and evaluate
-    record = Record(request.form, filename)
-
-    # Save record to database
-    print("Updating to Google sheets")
-    sheet_service.add_result(record.dump())
 
     if converted:
         file_for_inference = ch1_path
@@ -73,9 +67,17 @@ def post_recording():
     score = get_score(ONNX_MODEL, file_for_inference, 
         request.form["prompt"], grading_algo=request.form["grading_algo"])
     
+    # Process in DTO and evaluate
+    record = Record(request.form, filename)
+    record._evaluate(score)
+
+    # Save record to database
+    # print("Updating to Google sheets")
+    sheet_service.add_result(record.dump())
+
     # Delete file
     os.remove(src_path)
     if converted:
         os.remove(ch1_path)
 
-    return {'result': 'success', 'scores': score}
+    return {'result': 'success', 'channels': channels, 'scores': score}
