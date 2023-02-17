@@ -7,11 +7,11 @@ services:
       backend:
           ipv4_address: 172.28.1.1
   endpoint:
-    image: shine_aibe:v1.1
+    image: shine_aibe:v1.2
     links:
       - "inference: inf"
     ports:
-      - "5001:80"
+      - "3000:80"
     networks:
       backend:
           ipv4_address: 172.28.1.2

@@ -9,6 +9,7 @@ from datetime import datetime
 from flask_cors import CORS
 import os
 from deploy.predict_server import get_score
+import audio_utils
 
 app = Flask(__name__, instance_relative_config=True)
 app.config['SECRET_KEY'] = 'random-string'
@@ -43,7 +44,16 @@ def post_recording():
     # Temporarily save file
     recording = request.files['file']
     filename = datetime.now().strftime("%d-%m-%y-%H:%M:%S")
-    recording.save(f'tmp/{filename}.wav')
+    src_path = f'tmp/{filename}.wav'
+    recording.save(src_path)
+    ch1_path = f'tmp/{filename}-1ch.wav'
+
+    aud_seg = audio_utils.get_audio_segment(src_path)
+    converted = False
+    if audio_utils.get_channels(aud_seg) > 1:
+        audio_utils.export_to_1ch(aud_seg, ch1_path)
+        converted = True
+        
 
     # Upload to storage bucket
     print("Uploading to Drive")
@@ -55,9 +65,17 @@ def post_recording():
     # Save record to database
     print("Updating to Google sheets")
     sheet_service.add_result(record.dump())
-    score = get_score(ONNX_MODEL, f'tmp/{filename}.wav', 
+
+    if converted:
+        file_for_inference = ch1_path
+    else:
+        file_for_inference = src_path
+    score = get_score(ONNX_MODEL, file_for_inference, 
         request.form["prompt"], grading_algo=request.form["grading_algo"])
+    
     # Delete file
-    os.remove(f'tmp/{filename}.wav')
+    os.remove(src_path)
+    if converted:
+        os.remove(ch1_path)
 
     return {'result': 'success', 'scores': score}
