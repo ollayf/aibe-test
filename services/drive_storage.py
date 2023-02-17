@@ -14,6 +14,8 @@ class DriveStorageService:
 	
 	def upload(self, filename):
 		# filename = os.path.basename(filename)
+		if self.gauth.access_token_expired:
+			self.gauth.credentials = ServiceAccountCredentials.from_json_keyfile_name(self.CREDENTIALS, self.SCOPE)
 		gfile = self.drive.CreateFile({
 			'title': f'{filename}.wav',
 			'parents': [{
