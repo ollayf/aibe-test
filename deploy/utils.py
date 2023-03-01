@@ -9,7 +9,9 @@ def same_group(a, b):
         ['ts', 'tʃ'],
         ['ð', 'd'],
         ['a', 'ə', 'æ', 'əɜ', 'ɜː', 'ɛ', 'ɛɹ', 'eː', 'ɑː'],
+        ['a', 'ɑː', 'ɑ', 'ɔː', 'oʊ'],
         ['f', 'v'],
+        ['eɪ', 'eː']
     ]
     for group in groups:
         if a in group and b in group:

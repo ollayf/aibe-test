@@ -8,8 +8,9 @@ from models.record import Record
 from datetime import datetime
 from flask_cors import CORS
 import os
-from deploy.predict_server import get_score
+from deploy.predict_server import get_score, predict
 import audio_utils
+from pydub import AudioSegment
 
 app = Flask(__name__, instance_relative_config=True)
 app.config['SECRET_KEY'] = 'random-string'
@@ -51,6 +52,10 @@ def post_recording():
     aud_seg = audio_utils.get_audio_segment(src_path)
     converted = False
     channels = audio_utils.get_channels(aud_seg)
+
+    # only saves 16KHz to save space
+    aud_seg = audio_utils.resample_if_needed(aud_seg, src_path)
+
     if channels > 1:
         audio_utils.export_to_1ch(aud_seg, ch1_path)
         converted = True
@@ -64,7 +69,12 @@ def post_recording():
         file_for_inference = ch1_path
     else:
         file_for_inference = src_path
-    score = get_score(ONNX_MODEL, file_for_inference, 
+    
+    inf_framerate = AudioSegment.from_wav(file_for_inference).frame_rate
+    print("Framerate", inf_framerate)
+
+    # prediction = predict(ONNX_MODEL, file_for_inference)
+    prediction, score = get_score(ONNX_MODEL, file_for_inference, 
         request.form["prompt"], grading_algo=request.form["grading_algo"])
     
     # Process in DTO and evaluate
@@ -80,4 +90,4 @@ def post_recording():
     if converted:
         os.remove(ch1_path)
 
-    return {'result': 'success', 'channels': channels, 'scores': score}
+    return {'result': 'success', 'channels': channels, 'scores': score, "prediction": prediction}

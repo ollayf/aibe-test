@@ -57,9 +57,9 @@ def get_score(model_path, audio_file, correct, grading_algo):
     sp =  separator.Separator(phone=' ', word='')
     ref = phonemize(correct, separator=sp)
     if grading_algo == "wer2":
-        return wer2(ref, transcription, False)
+        return transcription, wer2(ref, transcription, False)
     else:
-        return wer(ref, transcription, False)
+        return transcription, wer(ref, transcription, False)
 
 
 if __name__ == '__main__':
