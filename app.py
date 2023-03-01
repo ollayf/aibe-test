@@ -62,7 +62,6 @@ def post_recording():
         
 
     # Upload to storage bucket
-    # print("Uploading to Drive")
     storage_service.upload(filename)
 
     if converted:
@@ -70,9 +69,6 @@ def post_recording():
     else:
         file_for_inference = src_path
     
-    inf_framerate = AudioSegment.from_wav(file_for_inference).frame_rate
-    print("Framerate", inf_framerate)
-
     # prediction = predict(ONNX_MODEL, file_for_inference)
     prediction, score = get_score(ONNX_MODEL, file_for_inference, 
         request.form["prompt"], grading_algo=request.form["grading_algo"])
@@ -82,7 +78,6 @@ def post_recording():
     record._evaluate(score)
 
     # Save record to database
-    # print("Updating to Google sheets")
     sheet_service.add_result(record.dump())
 
     # Delete file
