@@ -11,7 +11,7 @@ services:
     links:
       - "inference: inf"
     ports:
-      - "3000:80"
+      - "5001:80"
     networks:
       backend:
           ipv4_address: 172.28.1.2
