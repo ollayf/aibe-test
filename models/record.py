@@ -45,6 +45,7 @@ class Record:
             }
         }
         '''
+        print(result)
         self.grade = result["WER"]
         self.accuracy = result["acc"]
         self.loss = result["loss"]
