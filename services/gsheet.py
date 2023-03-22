@@ -31,4 +31,4 @@ class GoogleSheetService:
     def add_result(self, record):
         row = self.increment_total()
         self.data_sheet.update_values(
-            f'A{row}:V{row}', record)
+            f'A{row}:W{row}', record)

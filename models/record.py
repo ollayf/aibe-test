@@ -26,7 +26,7 @@ class Record:
     def dump(self):
         return [[
             self.created_at, self.student_name, self.teacher_helping, self.gender, self.kindergarten_group, self.center_name, self.birthday, self.level_of_study, self.mother_tongue, self.recorder_1, self.recorder_2, self.prompt, self.wav_file_location, self.good, self.fluency_score, self.noise_level, self.accuracy_score, 
-            self.grading_algo, self.grade, self.accuracy, self.loss, self.remarks
+            self.grading_algo, self.grade, self.accuracy, self.loss, self.pr, self.remarks
         ]]
 
     def _evaluate(self, result):
@@ -49,3 +49,4 @@ class Record:
         self.grade = result["WER"]
         self.accuracy = result["acc"]
         self.loss = result["loss"]
+        self.pr = result["PR"]

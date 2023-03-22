@@ -116,7 +116,8 @@ def wer2(ref, hyp ,debug=True):
     wer_result = round( (numSub + numDel + numIns) / (float) (len(r)), 3)
     loss = round( (numSub + numDel) / (float) (max_len), 3)
     accuracy = 1 - loss
-    return {'WER':wer_result, 'acc': accuracy, 'numCor':numCor, 'numSub':numSub, 'numIns':numIns, 'numDel':numDel, "numCount": len(r), "loss":loss}
+    return {'WER':wer_result, 'acc': accuracy, 'numCor':numCor, 'numSub':numSub, 'numIns':numIns, 'numDel':numDel,
+            "numCount": len(r), "loss":loss, "PR": hyp}
 
 
 def wer(ref, hyp ,debug=True):
@@ -214,7 +215,8 @@ def wer(ref, hyp ,debug=True):
     # return (numSub + numDel + numIns) / (float) (len(r))
     wer_result = round( (numSub + numDel + numIns) / (float) (len(r)), 3)
     loss = round( (numSub + numDel) / (float) (len(r)), 3)
-    return {'WER':wer_result, 'numCor':numCor, 'numSub':numSub, 'numIns':numIns, 'numDel':numDel, "numCount": len(r), "loss":loss, "acc": 1-loss}
+    return {'WER':wer_result, 'numCor':numCor, 'numSub':numSub, 'numIns':numIns, 'numDel':numDel, "numCount": len(r), "loss":loss, "acc": 1-loss,
+            "PR": hyp}
 
 if __name__ == '__main__':
     from phonemizer import phonemize, separator

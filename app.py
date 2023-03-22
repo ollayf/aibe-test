@@ -85,4 +85,4 @@ def post_recording():
     if converted:
         os.remove(ch1_path)
 
-    return {'result': 'success', 'channels': channels, 'scores': score, "prediction": prediction}
+    return {'result': 'success', 'channels': channels, 'scores': score}
