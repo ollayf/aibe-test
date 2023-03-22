@@ -42,6 +42,7 @@ def post_recording():
     - prompt: <String>
     '''
     ONNX_MODEL = 'phoneme1'
+    RECORDING_TIME_LIMIT = 7 # seconds
     # Temporarily save file
     recording = request.files['file']
     filename = datetime.now().strftime("%d-%m-%y-%H:%M:%S")
@@ -50,6 +51,8 @@ def post_recording():
     ch1_path = f'tmp/{filename}-1ch.wav'
 
     aud_seg = audio_utils.get_audio_segment(src_path)
+    if (audio_utils.get_audio_length(aud_seg) > RECORDING_TIME_LIMIT):
+        return {"message": "audio too long. Must not be above 7 seconds"}, 501
     converted = False
     channels = audio_utils.get_channels(aud_seg)
 

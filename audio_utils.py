@@ -22,3 +22,6 @@ def resample_if_needed(aud_seg, save_path=None):
             aud_seg.export(save_path, format='wav')
     
     return aud_seg
+
+def get_audio_length(aud_seg):
+    return aud_seg.durations_seconds
