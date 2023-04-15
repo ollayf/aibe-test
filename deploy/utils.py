@@ -113,7 +113,7 @@ def wer2(ref, hyp ,debug=True):
         print("#del " + str(numDel))
         print("#ins " + str(numIns))
     # return (numSub + numDel + numIns) / (float) (len(r))
-    if max_len:
+    if len(h) and len(r):
         wer_result = round( (numSub + numDel + numIns) / (float) (len(r)), 3)
         loss = round( (numSub + numDel) / (float) (max_len), 3)
     else:
