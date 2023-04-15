@@ -11,6 +11,8 @@ import os
 from deploy.predict_server import get_score, predict
 import audio_utils
 from pydub import AudioSegment
+import os
+import re
 
 app = Flask(__name__, instance_relative_config=True)
 app.config['SECRET_KEY'] = 'random-string'
@@ -25,11 +27,21 @@ print("Created everything")
 def health_check():
     return 'Success'
 
-
-@app.route('/prompts', methods=['GET'])
+@app.route('/prompts/<path:file>/', methods=['GET'])
 @jwt_required()
-def get_prompts():
-    prompts = json.load(open('assets/prompts.json', 'r'))
+def get_prompts(file: str):
+
+    NOT_ALPHANUMERIC_REGEX = "[^a-zA-Z0-9_]"    
+    if re.search(NOT_ALPHANUMERIC_REGEX, file):
+        return "Error: Invalid File Name. It can only be alphanumeric with _"
+
+    file_path = f"./prompt_lists/{file}.json"
+
+    if not os.path.exists(file_path):
+        return f"Error: File not Found: {file}.", 404
+
+
+    prompts = json.load(open(file_path, 'r'))
     return {'prompts': prompts}
 
 
